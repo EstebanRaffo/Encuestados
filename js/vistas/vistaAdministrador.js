@@ -11,6 +11,14 @@ var VistaAdministrador = function(modelo, controlador, elementos) {
   this.modelo.preguntaAgregada.suscribir(function() {
     contexto.reconstruirLista();
   });
+
+  this.modelo.preguntaEliminada.suscribir(function(){
+    contexto.reconstruirLista();
+  });
+
+  this.modelo.todasLasPreguntasEliminadas.suscribir(function(){
+    contexto.reconstruirLista();
+  });
 };
 
 
@@ -19,13 +27,23 @@ VistaAdministrador.prototype = {
   inicializar: function() {
     //llamar a los metodos para reconstruir la lista, configurar botones y validar formularios
     validacionDeFormulario();
+    this.reconstruirLista();
+    this.configuracionDeBotones();
   },
 
   construirElementoPregunta: function(pregunta){
     var contexto = this;
-    var nuevoItem;
-    //completar
-    //asignar a nuevoitem un elemento li con clase "list-group-item", id "pregunta.id" y texto "pregunta.textoPregunta"
+    // completar
+    // var unaRespuesta = {'textoRespuesta': respuesta, 'cantidad': cantVotos}
+    // var nuevaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
+    // asignar a nuevoitem un elemento li con clase "list-group-item", id "pregunta.id" y texto "pregunta.textoPregunta" 
+    var nuevoItem = $('<li>');
+    nuevoItem.attr({'class': 'list-group-item', 'id': pregunta.id});
+    nuevoItem.text(pregunta.textoPregunta);
+
+    // this.modelo.preguntas = [{'textoPregunta': "Mi primer Pregunta", 'id': 0, 
+    // 'cantidadPorRespuesta': [{'textoRespuesta': "mi unica respuesta", 'cantidad': 2}]}]
+    
     var interiorItem = $('.d-flex');
     var titulo = interiorItem.find('h5');
     titulo.text(pregunta.textoPregunta);
@@ -56,11 +74,37 @@ VistaAdministrador.prototype = {
 
       $('[name="option[]"]').each(function() {
         //completar
+        // var unaRespuesta = {'textoRespuesta': respuesta, 'cantidad': cantVotos}
+        textoDeRespuesta = $(this).val();
+        respuestas.push({'textoRespuesta': textoDeRespuesta, 'cantidad': 0});
       })
+
       contexto.limpiarFormulario();
       contexto.controlador.agregarPregunta(value, respuestas);
     });
+    
     //asociar el resto de los botones a eventos
+    
+    // Editar Pregunta
+    $('#editarPregunta').click(function(){
+      var id = parseInt($('.list-group-item.active').attr('id'));
+
+      var unaPregunta = $('#lista').children().find(function(unitem){
+        return unitem.attr('id') == id;
+      });
+
+
+    });
+
+    $('#borrarPregunta').click(function(){
+      var id = parseInt($('.list-group-item.active').attr('id'));
+      contexto.controlador.eliminarPregunta(id);
+    });
+
+    $('#borrarTodo').click(function(){
+      contexto.controlador.eliminarTodasLasPreguntas();
+    });
+
   },
 
   limpiarFormulario: function(){

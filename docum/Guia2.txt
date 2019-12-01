@@ -1,0 +1,19 @@
+Guía Parte 2: Desarrollando el modelo
+
+Producto
+
+En esta guía se tienen que completar todas las funcionalidades del modelo, como editar una pregunta, agregar los votos de los usuarios,
+y borrar todas las preguntas. Además, se debe agregar local storage para almacenar localmente la información sobre las preguntas y 
+que éstas no se pierdan cuando se cierra el explorador.
+
+Paso 1: Implementando las funcionalidades del modelo
+En este paso vas a tener que agregarle al modelo todas las funciones necesarias para manipular las preguntas y respuestas: agregar 
+respuesta, eliminar pregunta, sumarle 1 al voto de una respuesta, editar una pregunta, borrar todas las preguntas, o cualquier otra 
+que te interese. Acordate que el modelo es el encargado de almacenar los datos, así que ¡a agregar funciones que se encarguen de hacer
+los cambios en él!
+
+Paso 2: Incorporando LocalStorage
+Cada vez que cerrás tu explorador se borran todas tus preguntas, respuestas y votos. Para que esto deje de suceder, vas a incorporar 
+el almacenamiento local (el objeto localStorage) de los objetos pregunta para que no se pierda ningún tipo de información y se pueda 
+seguir con las encuestas después de haber cerrado el explorador. No te olvides de actualizar o borrar esa información cada vez que sea
+necesario.
