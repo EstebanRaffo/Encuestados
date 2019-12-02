@@ -12,7 +12,7 @@ En este paso vas a tener que agregarle al modelo todas las funciones necesarias 
 agregar respuesta: OK
 eliminar pregunta: OK  
 borrar todas las preguntas: OK
-editar una pregunta: 
+editar una pregunta: OK
 sumarle 1 al voto de una respuesta (vistaUsuario):
 cualquier otra que te interese: 
 Acordate que el modelo es el encargado de almacenar los datos, así que ¡a agregar funciones que se encarguen de hacer
