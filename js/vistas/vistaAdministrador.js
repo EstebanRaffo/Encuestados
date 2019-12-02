@@ -19,6 +19,10 @@ var VistaAdministrador = function(modelo, controlador, elementos) {
   this.modelo.todasLasPreguntasEliminadas.suscribir(function(){
     contexto.reconstruirLista();
   });
+
+  this.modelo.preguntaEditada.suscribir(function(){
+    contexto.reconstruirLista();
+  });
 };
 
 
@@ -88,11 +92,8 @@ VistaAdministrador.prototype = {
     // Editar Pregunta
     $('#editarPregunta').click(function(){
       var id = parseInt($('.list-group-item.active').attr('id'));
-
-      var unaPregunta = $('#lista').children().find(function(unitem){
-        return unitem.attr('id') == id;
-      });
-
+      var nuevoTexto = prompt('Editar pregunta');
+      contexto.controlador.editarPregunta(id, nuevoTexto);
 
     });
 

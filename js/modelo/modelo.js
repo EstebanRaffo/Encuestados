@@ -9,6 +9,7 @@ var Modelo = function() {
   this.preguntaAgregada = new Evento(this);
   this.preguntaEliminada = new Evento(this);
   this.todasLasPreguntasEliminadas = new Evento(this);
+  this.preguntaEditada = new Evento(this);
 };
 
 Modelo.prototype = {
@@ -36,7 +37,10 @@ Modelo.prototype = {
   },
 
   eliminarPregunta: function(id){
-    var posicion = this.preguntas.indexOf(id);
+    var laPregunta = this.preguntas.find(function(unaPregunta){
+      return unaPregunta.id == id;
+    });
+    var posicion = this.preguntas.indexOf(laPregunta);
     this.preguntas.splice(posicion, 1);
     this.guardar();
     this.preguntaEliminada.notificar(); 
@@ -46,6 +50,18 @@ Modelo.prototype = {
     this.preguntas = [];
     this.guardar();
     this.todasLasPreguntasEliminadas.notificar();
+  },
+
+  editarPregunta: function(id, nuevoTexto){
+    let pos = 0;
+
+    while(this.preguntas[pos].id != id){
+      pos++;
+    }
+
+    this.preguntas[pos].textoPregunta = nuevoTexto;
+    this.guardar();
+    this.preguntaEditada.notificar();
   },
 
   //se guardan las preguntas (localstorage)

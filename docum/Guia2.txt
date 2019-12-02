@@ -1,4 +1,5 @@
-Guía Parte 2: Desarrollando el modelo
+Guía Parte 2: Desarrollando el modelo / Video Descripción de la Aplicación: 
+https://www.acamica.com/clases/8792/encuestados-introduccion/descripcion-de-la-aplicacion
 
 Producto
 
@@ -7,9 +8,14 @@ y borrar todas las preguntas. Además, se debe agregar local storage para almace
 que éstas no se pierdan cuando se cierra el explorador.
 
 Paso 1: Implementando las funcionalidades del modelo
-En este paso vas a tener que agregarle al modelo todas las funciones necesarias para manipular las preguntas y respuestas: agregar 
-respuesta, eliminar pregunta, sumarle 1 al voto de una respuesta, editar una pregunta, borrar todas las preguntas, o cualquier otra 
-que te interese. Acordate que el modelo es el encargado de almacenar los datos, así que ¡a agregar funciones que se encarguen de hacer
+En este paso vas a tener que agregarle al modelo todas las funciones necesarias para manipular las preguntas y respuestas: 
+agregar respuesta: OK
+eliminar pregunta: OK  
+borrar todas las preguntas: OK
+editar una pregunta: 
+sumarle 1 al voto de una respuesta (vistaUsuario):
+cualquier otra que te interese: 
+Acordate que el modelo es el encargado de almacenar los datos, así que ¡a agregar funciones que se encarguen de hacer
 los cambios en él!
 
 Paso 2: Incorporando LocalStorage
