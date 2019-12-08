@@ -66,6 +66,14 @@ Modelo.prototype = {
 
   //se guardan las preguntas (localstorage)
   guardar: function(){
+    if(this.preguntas.length == 0){
+      return
+    }
+    else{
+      this.preguntas.forEach(unaPregunta => localStorage.setItem(unaPregunta.id, JSON.stringify(unaPregunta)))
+      console.log(JSON.parse(localStorage.getItem(this.preguntas[0].id)))
+      console.log(this.preguntas[0])
+    }
   },
 
 };

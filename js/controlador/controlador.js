@@ -23,7 +23,7 @@ Controlador.prototype = {
   },
 
   agregarVoto: function(nombrePregunta,respuestaSeleccionada){
-
+    
   }
 };
 

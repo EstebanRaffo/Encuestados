@@ -95,7 +95,6 @@ VistaAdministrador.prototype = {
       var id = parseInt($('.list-group-item.active').attr('id'));
       var nuevoTexto = prompt('Editar pregunta');
       contexto.controlador.editarPregunta(id, nuevoTexto);
-
     });
 
     $('#borrarPregunta').click(function(){

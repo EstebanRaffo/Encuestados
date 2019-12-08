@@ -13,7 +13,7 @@ agregar respuesta: OK
 eliminar pregunta: OK  
 borrar todas las preguntas: OK
 editar una pregunta: OK
-sumarle 1 al voto de una respuesta (vistaUsuario):
+sumarle 1 al voto de una respuesta (vistaUsuario): 
 cualquier otra que te interese: 
 Acordate que el modelo es el encargado de almacenar los datos, así que ¡a agregar funciones que se encarguen de hacer
 los cambios en él!
