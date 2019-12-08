@@ -55,6 +55,7 @@ VistaAdministrador.prototype = {
       return " " + resp.textoRespuesta;
     }));
     nuevoItem.html($('.d-flex').html());
+    
     return nuevoItem;
   },
 

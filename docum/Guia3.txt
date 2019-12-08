@@ -1,0 +1,35 @@
+Guía 3: Amoldando el controlador y las vistas
+
+Producto
+
+En esta guía se deben incorporar las funcionalidades del modelo al controlador y a las vistas para que puedan ser utilizadas desde 
+las interfaces del usuario y del administrador.
+
+Paso 1: Completando el controlador
+Ahora que tenés el modelo con sus funciones incorporadas, hay que adaptar el controlador para que llame al modelo en cuanto ocurra un
+evento en alguna de las vistas. El controlador tiene que poder responder a los eventos de modificar, agregar, borrar una pregunta y
+agregar un voto.
+
+Recomiendan los/as pro: Es bueno validar los datos que recibe el controlador (por ejemplo que un id esté correctamente definido) para 
+que los casos incorrectos ni siquiera lleguen al modelo.
+
+Paso 2: Completando la vista usuario
+Cada vez que se actualiza algo en el modelo, esto tiene que verse reflejado en las vistas. En este caso, vamos a enfocarnos en la vista
+ del usuario. Es importante preguntarse qué eventos van a realizar modificaciones en dicha vista, o sea, a qué eventos debería estar
+  suscripta y qué función debería ejecutarse cuando el modelo notifica dichos eventos.
+
+En nuestro caso, cada vez que se agrega o elimina una pregunta, nos va a interesar que se actualice el formulario de votación, o sea 
+que cada pregunta sea mostrada por pantalla con sus respectivas respuestas.
+
+No te olvides de asignarle las funciones del controlador a los eventos de los botones para que se ejecuten cuando éstos sean oprimidos.
+
+
+Paso 3: Completando la vista administrador
+Ahora vamos a querer realizar lo mismo que para la vista usuario pero del lado del administrador. A éste vamos a darle la posibilidad
+de editar las preguntas, de agregar preguntas con sus respectivas respuestas, de borrarlas y de borrar todo.
+
+Además, cada cambio que se realice va a tener que verse reflejado en la interfaz y para esto va a haber que recorrer la lista de 
+preguntas del modelo y van a tener que agregarse los elementos necesarios al HTML por cada una de ellas. No te olvides de asignarle a 
+los botones las acciones correspondientes del controlador.
+
+Si te animás, ¡agregá más vistas que te permitan visualizar los datos de otra forma o mostrar lo que te parezca!
