@@ -63,7 +63,7 @@ VistaAdministrador.prototype = {
     var lista = this.elementos.lista;
     lista.html('');
     var preguntas = this.modelo.preguntas;
-    for (var i=0;i<preguntas.length;++i){
+    for (var i = 0; i < preguntas.length; ++i){
       lista.append(this.construirElementoPregunta(preguntas[i]));
     }
   },

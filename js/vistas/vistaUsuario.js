@@ -49,22 +49,23 @@ VistaUsuario.prototype = {
     var contexto = this;
     var preguntas = this.modelo.preguntas;
     preguntas.forEach(function(clave){
-      //completar
-      //agregar a listaPreguntas un elemento div con valor "clave.textoPregunta", texto "clave.textoPregunta", id "clave.id"
-      var contenidoJSON = localStorage.getItem(clave.id)
-      var contenido = JSON.parse(contenidoJSON)
-      console.log(contenido)
-      clave = contenido
-      var unaPregunta = $('<div>');
-      $(unaPregunta).attr({'id': clave.id, 'value': clave.textoPregunta});
-      // $(unaPregunta).html(clave.textoPregunta);
-      $(unaPregunta).text(clave.textoPregunta);
-      console.log(unaPregunta)
-      listaPreguntas.append(unaPregunta) 
-      console.log(listaPreguntas)
+        //completar
+        //agregar a listaPreguntas un elemento div con valor "clave.textoPregunta", texto "clave.textoPregunta", id "clave.id"
+        
+        console.log(clave)
+        console.log()
+        // clave = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
 
-      var respuestas = clave.cantidadPorRespuesta;
-      contexto.mostrarRespuestas(listaPreguntas,respuestas, clave);
+        // var unaPregunta = $('<div>');
+        // $(unaPregunta).attr({'id': clave.id, 'value': clave.textoPregunta});
+        // $(unaPregunta).html(clave.textoPregunta);
+        // $(unaPregunta).text(clave.textoPregunta);
+        // console.log(unaPregunta)
+        // listaPreguntas.append(unaPregunta) 
+        // console.log(listaPreguntas)
+
+        var respuestas = clave.cantidadPorRespuesta;
+        contexto.mostrarRespuestas(listaPreguntas,respuestas, clave);
     })
   },
 
