@@ -48,6 +48,7 @@ VistaUsuario.prototype = {
     listaPreguntas.html('');
     var contexto = this;
     var preguntas = this.modelo.preguntas;
+    console.log(preguntas)
     preguntas.forEach(function(clave){
         //completar
         //agregar a listaPreguntas un elemento div con valor "clave.textoPregunta", texto "clave.textoPregunta", id "clave.id"
