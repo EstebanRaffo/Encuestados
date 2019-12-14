@@ -35,19 +35,34 @@ VistaAdministrador.prototype = {
     this.configuracionDeBotones();
   },
 
+  reconstruirLista: function() {
+    var lista = this.elementos.lista;
+    lista.html('');
+    var preguntas = this.modelo.preguntas;
+    for (var i = 0; i < preguntas.length; ++i){
+      lista.append(this.construirElementoPregunta(preguntas[i]));
+    }
+  },
+
   construirElementoPregunta: function(pregunta){
     var contexto = this;
     // completar
+    
     // var unaRespuesta = {'textoRespuesta': respuesta, 'cantidad': cantVotos}
     // var nuevaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
+    
+    // Recuperar del localstorage si preguntas esta vacio
+
     // asignar a nuevoitem un elemento li con clase "list-group-item", id "pregunta.id" y texto "pregunta.textoPregunta" 
     var nuevoItem = $('<li>');
     nuevoItem.attr({'class': 'list-group-item', 'id': pregunta.id});
     nuevoItem.text(pregunta.textoPregunta);
 
     // this.modelo.preguntas = [{'textoPregunta': "Mi primer Pregunta", 'id': 0, 
-    // 'cantidadPorRespuesta': [{'textoRespuesta': "mi unica respuesta", 'cantidad': 2}]}]
+    //                          'cantidadPorRespuesta': [{'textoRespuesta': "mi unica respuesta", 'cantidad': 2}]}]
     
+    
+
     var interiorItem = $('.d-flex');
     var titulo = interiorItem.find('h5');
     titulo.text(pregunta.textoPregunta);
@@ -57,15 +72,6 @@ VistaAdministrador.prototype = {
     nuevoItem.html($('.d-flex').html());
     
     return nuevoItem;
-  },
-
-  reconstruirLista: function() {
-    var lista = this.elementos.lista;
-    lista.html('');
-    var preguntas = this.modelo.preguntas;
-    for (var i = 0; i < preguntas.length; ++i){
-      lista.append(this.construirElementoPregunta(preguntas[i]));
-    }
   },
 
   configuracionDeBotones: function(){

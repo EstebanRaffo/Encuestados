@@ -71,8 +71,6 @@ Modelo.prototype = {
     }
     else{
       this.preguntas.forEach(unaPregunta => localStorage.setItem(unaPregunta.id, JSON.stringify(unaPregunta)))
-      console.log(JSON.parse(localStorage.getItem(this.preguntas[0].id)))
-      console.log(this.preguntas[0])
     }
   },
 

@@ -48,25 +48,33 @@ VistaUsuario.prototype = {
     listaPreguntas.html('');
     var contexto = this;
     var preguntas = this.modelo.preguntas;
-    console.log(preguntas)
+    
+    if(preguntas.isEmpty()){
+      var unaPregunta = JSON.parse(localStorage.getItem(1));
+      
+      while(unaPregunta != null){
+        preguntas.push(unaPregunta);
+        unaPregunta = JSON.parse  
+      }
+    }
+
     preguntas.forEach(function(clave){
         //completar
         //agregar a listaPreguntas un elemento div con valor "clave.textoPregunta", texto "clave.textoPregunta", id "clave.id"
         
         console.log(clave)
-        console.log()
         // clave = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
 
         // var unaPregunta = $('<div>');
         // $(unaPregunta).attr({'id': clave.id, 'value': clave.textoPregunta});
         // $(unaPregunta).html(clave.textoPregunta);
         // $(unaPregunta).text(clave.textoPregunta);
-        // console.log(unaPregunta)
+        
         // listaPreguntas.append(unaPregunta) 
-        // console.log(listaPreguntas)
+        
 
         var respuestas = clave.cantidadPorRespuesta;
-        contexto.mostrarRespuestas(listaPreguntas,respuestas, clave);
+        contexto.mostrarRespuestas(listaPreguntas, respuestas, clave);
     })
   },
 
