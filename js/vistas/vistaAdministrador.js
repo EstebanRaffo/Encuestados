@@ -30,6 +30,8 @@ VistaAdministrador.prototype = {
   //lista
   inicializar: function() {
     //llamar a los metodos para reconstruir la lista, configurar botones y validar formularios
+    console.log(this.modelo.preguntas);
+    this.controlador.recuperar();
     validacionDeFormulario();
     this.reconstruirLista();
     this.configuracionDeBotones();
@@ -39,6 +41,11 @@ VistaAdministrador.prototype = {
     var lista = this.elementos.lista;
     lista.html('');
     var preguntas = this.modelo.preguntas;
+    
+    // if(preguntas.length === 0){
+    //   preguntas = this.modelo.recuperar();
+    // }
+
     for (var i = 0; i < preguntas.length; ++i){
       lista.append(this.construirElementoPregunta(preguntas[i]));
     }
@@ -61,8 +68,6 @@ VistaAdministrador.prototype = {
     // this.modelo.preguntas = [{'textoPregunta': "Mi primer Pregunta", 'id': 0, 
     //                          'cantidadPorRespuesta': [{'textoRespuesta': "mi unica respuesta", 'cantidad': 2}]}]
     
-    
-
     var interiorItem = $('.d-flex');
     var titulo = interiorItem.find('h5');
     titulo.text(pregunta.textoPregunta);

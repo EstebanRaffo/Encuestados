@@ -22,6 +22,10 @@ Controlador.prototype = {
     this.modelo.editarPregunta(id, nuevoTexto);
   },
 
+  recuperar: function(){
+    this.modelo.recuperar();
+  },
+
   agregarVoto: function(nombrePregunta,respuestaSeleccionada){
     
   }

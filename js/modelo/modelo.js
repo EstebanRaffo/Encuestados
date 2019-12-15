@@ -42,13 +42,15 @@ Modelo.prototype = {
     });
     var posicion = this.preguntas.indexOf(laPregunta);
     this.preguntas.splice(posicion, 1);
-    this.guardar();
+    // this.guardar();
+    localStorage.removeItem(posicion)
     this.preguntaEliminada.notificar(); 
   },
 
   eliminarTodasLasPreguntas: function(){
     this.preguntas = [];
     this.guardar();
+    localStorage.clear();
     this.todasLasPreguntasEliminadas.notificar();
   },
 
@@ -66,12 +68,18 @@ Modelo.prototype = {
 
   //se guardan las preguntas (localstorage)
   guardar: function(){
-    if(this.preguntas.length == 0){
-      return
-    }
-    else{
-      this.preguntas.forEach(unaPregunta => localStorage.setItem(unaPregunta.id, JSON.stringify(unaPregunta)))
-    }
+    // localStorage.clear();
+    this.preguntas.forEach(unaPregunta => localStorage.setItem(unaPregunta.id, JSON.stringify(unaPregunta)));
   },
 
+  recuperar: function(){
+    var i = 1;
+    var unaPregunta = JSON.parse(localStorage.getItem(i));
+
+    while(unaPregunta != null){
+      this.preguntas.push(unaPregunta);
+      i++;
+      unaPregunta = JSON.parse(localStorage.getItem(i));
+    }
+  }
 };

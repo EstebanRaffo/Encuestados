@@ -11,11 +11,24 @@ var VistaUsuario = function(modelo, controlador, elementos) {
   this.modelo.preguntaAgregada.suscribir(function() {
     contexto.reconstruirLista();
   });
+
+  this.modelo.preguntaEliminada.suscribir(function(){
+    contexto.reconstruirLista();
+  });
+
+  this.modelo.todasLasPreguntasEliminadas.suscribir(function(){
+    contexto.reconstruirLista();
+  });
+
+  this.modelo.preguntaEditada.suscribir(function(){
+    contexto.reconstruirLista();
+  });
 };
 
 VistaUsuario.prototype = {
   //muestra la lista por pantalla y agrega el manejo del boton agregar
   inicializar: function() {
+    this.controlador.recuperar();
     this.reconstruirLista();
     var elementos = this.elementos;
     var contexto = this;
@@ -47,16 +60,13 @@ VistaUsuario.prototype = {
     var listaPreguntas = this.elementos.listaPreguntas;
     listaPreguntas.html('');
     var contexto = this;
-    var preguntas = this.modelo.preguntas;
     
-    if(preguntas.isEmpty()){
-      var unaPregunta = JSON.parse(localStorage.getItem(1));
-      
-      while(unaPregunta != null){
-        preguntas.push(unaPregunta);
-        unaPregunta = JSON.parse  
-      }
-    }
+    var preguntas = contexto.modelo.preguntas;
+
+    // if(preguntas.length === 0){
+    //   preguntas = contexto.modelo.recuperar();
+    // }
+    console.log(preguntas)
 
     preguntas.forEach(function(clave){
         //completar
@@ -65,14 +75,13 @@ VistaUsuario.prototype = {
         console.log(clave)
         // clave = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
 
-        // var unaPregunta = $('<div>');
-        // $(unaPregunta).attr({'id': clave.id, 'value': clave.textoPregunta});
-        // $(unaPregunta).html(clave.textoPregunta);
-        // $(unaPregunta).text(clave.textoPregunta);
+        var unaPregunta = $('<div>');
+        $(unaPregunta).attr('id', clave.id);
+        $(unaPregunta).val(clave.textoPregunta);
+        $(unaPregunta).text(clave.textoPregunta);
         
-        // listaPreguntas.append(unaPregunta) 
+        listaPreguntas.append(unaPregunta) 
         
-
         var respuestas = clave.cantidadPorRespuesta;
         contexto.mostrarRespuestas(listaPreguntas, respuestas, clave);
     })
