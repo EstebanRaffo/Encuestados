@@ -61,11 +61,8 @@ VistaUsuario.prototype = {
     listaPreguntas.html('');
     var contexto = this;
     
-    var preguntas = contexto.modelo.preguntas;
+    var preguntas = this.modelo.preguntas;
 
-    // if(preguntas.length === 0){
-    //   preguntas = contexto.modelo.recuperar();
-    // }
     console.log(preguntas)
 
     preguntas.forEach(function(clave){

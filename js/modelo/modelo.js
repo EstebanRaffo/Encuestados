@@ -32,7 +32,7 @@ Modelo.prototype = {
     id++;
     var nuevaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
     this.preguntas.push(nuevaPregunta);
-    this.guardar();
+    this.guardar(nuevaPregunta);
     this.preguntaAgregada.notificar();
   },
 
@@ -42,14 +42,12 @@ Modelo.prototype = {
     });
     var posicion = this.preguntas.indexOf(laPregunta);
     this.preguntas.splice(posicion, 1);
-    // this.guardar();
-    localStorage.removeItem(posicion)
+    localStorage.removeItem(laPregunta.id);
     this.preguntaEliminada.notificar(); 
   },
 
   eliminarTodasLasPreguntas: function(){
     this.preguntas = [];
-    this.guardar();
     localStorage.clear();
     this.todasLasPreguntasEliminadas.notificar();
   },
@@ -62,14 +60,15 @@ Modelo.prototype = {
     }
 
     this.preguntas[pos].textoPregunta = nuevoTexto;
-    this.guardar();
+    this.guardar(this.preguntas[pos]);
     this.preguntaEditada.notificar();
   },
 
   //se guardan las preguntas (localstorage)
-  guardar: function(){
+  guardar: function(unaPregunta){
     // localStorage.clear();
-    this.preguntas.forEach(unaPregunta => localStorage.setItem(unaPregunta.id, JSON.stringify(unaPregunta)));
+    // this.preguntas.forEach(unaPregunta => localStorage.setItem(unaPregunta.id, JSON.stringify(unaPregunta)));
+    localStorage.setItem(unaPregunta.id, JSON.stringify(unaPregunta));
   },
 
   recuperar: function(){

@@ -41,10 +41,7 @@ VistaAdministrador.prototype = {
     var lista = this.elementos.lista;
     lista.html('');
     var preguntas = this.modelo.preguntas;
-    
-    // if(preguntas.length === 0){
-    //   preguntas = this.modelo.recuperar();
-    // }
+
 
     for (var i = 0; i < preguntas.length; ++i){
       lista.append(this.construirElementoPregunta(preguntas[i]));
@@ -58,8 +55,6 @@ VistaAdministrador.prototype = {
     // var unaRespuesta = {'textoRespuesta': respuesta, 'cantidad': cantVotos}
     // var nuevaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
     
-    // Recuperar del localstorage si preguntas esta vacio
-
     // asignar a nuevoitem un elemento li con clase "list-group-item", id "pregunta.id" y texto "pregunta.textoPregunta" 
     var nuevoItem = $('<li>');
     nuevoItem.attr({'class': 'list-group-item', 'id': pregunta.id});
