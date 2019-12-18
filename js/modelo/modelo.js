@@ -43,6 +43,7 @@ Modelo.prototype = {
       return unaPregunta.id == id;
     });
     var posicion = this.preguntas.indexOf(laPregunta);
+    console.log(posicion)
     this.preguntas.splice(posicion, 1);
     localStorage.removeItem(laPregunta.id);
     this.preguntaEliminada.notificar(); 
@@ -74,13 +75,14 @@ Modelo.prototype = {
   },
 
   recuperar: function(){
-    var i = 1;
-    var unaPregunta = JSON.parse(localStorage.getItem(i));
+    var unaPregunta;
 
-    while(unaPregunta != null){
-      this.preguntas.push(unaPregunta);
-      i++;
+    for(var i = 1; i <= this.preguntas.length; i++){
       unaPregunta = JSON.parse(localStorage.getItem(i));
+      console.log(unaPregunta)
+      if(unaPregunta != null){
+        this.preguntas.push(unaPregunta);
+      }
     }
   }
 };

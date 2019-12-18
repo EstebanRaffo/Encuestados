@@ -91,7 +91,9 @@ VistaAdministrador.prototype = {
         //completar
         // var unaRespuesta = {'textoRespuesta': respuesta, 'cantidad': cantVotos}
         textoDeRespuesta = $(this).val();
-        respuestas.push({'textoRespuesta': textoDeRespuesta, 'cantidad': 0});
+        if(textoDeRespuesta != ''){
+          respuestas.push({'textoRespuesta': textoDeRespuesta, 'cantidad': 0});
+        }
       })
 
       contexto.limpiarFormulario();
