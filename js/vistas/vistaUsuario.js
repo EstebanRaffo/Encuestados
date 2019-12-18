@@ -28,7 +28,7 @@ var VistaUsuario = function(modelo, controlador, elementos) {
 VistaUsuario.prototype = {
   //muestra la lista por pantalla y agrega el manejo del boton agregar
   inicializar: function() {
-    this.controlador.recuperar();
+    // this.controlador.recuperar();
     this.reconstruirLista();
     var elementos = this.elementos;
     var contexto = this;
@@ -62,6 +62,11 @@ VistaUsuario.prototype = {
     var contexto = this;
     
     var preguntas = this.modelo.preguntas;
+
+    if(preguntas.length === 0){
+      this.controlador.recuperar();
+      preguntas = this.modelo.preguntas;
+    }
 
     console.log(preguntas)
 

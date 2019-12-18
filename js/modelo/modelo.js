@@ -30,9 +30,11 @@ Modelo.prototype = {
   agregarPregunta: function(nombre, respuestas) {
     var id = this.obtenerUltimoId();
     id++;
+    console.log(respuestas)
     var nuevaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
     this.preguntas.push(nuevaPregunta);
     this.guardar(nuevaPregunta);
+    console.log(localStorage.getItem(id))
     this.preguntaAgregada.notificar();
   },
 
