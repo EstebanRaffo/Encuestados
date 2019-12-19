@@ -30,11 +30,13 @@ Modelo.prototype = {
   agregarPregunta: function(nombre, respuestas) {
     var id = this.obtenerUltimoId();
     id++;
-    console.log(respuestas)
+    console.log('Respuestas de la pregunta id: ', id, respuestas)
     var nuevaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
     this.preguntas.push(nuevaPregunta);
     this.guardar(nuevaPregunta);
-    console.log(localStorage.getItem(id))
+    
+    console.log('Pregunta recuperada del storage: ', localStorage.getItem(id))
+    
     this.preguntaAgregada.notificar();
   },
 
@@ -43,9 +45,10 @@ Modelo.prototype = {
       return unaPregunta.id == id;
     });
     var posicion = this.preguntas.indexOf(laPregunta);
-    console.log(posicion)
+    console.log('Posicion de la pregunta en el modelo: ', posicion)
     this.preguntas.splice(posicion, 1);
     localStorage.removeItem(laPregunta.id);
+    
     this.preguntaEliminada.notificar(); 
   },
 
@@ -69,20 +72,17 @@ Modelo.prototype = {
 
   //se guardan las preguntas (localstorage)
   guardar: function(unaPregunta){
-    // localStorage.clear();
-    // this.preguntas.forEach(unaPregunta => localStorage.setItem(unaPregunta.id, JSON.stringify(unaPregunta)));
     localStorage.setItem(unaPregunta.id, JSON.stringify(unaPregunta));
   },
 
   recuperar: function(){
-    var unaPregunta;
+    var clave = 1;
+    unaPregunta = JSON.parse(localStorage.getItem(clave));
 
-    for(var i = 1; i <= this.preguntas.length; i++){
-      unaPregunta = JSON.parse(localStorage.getItem(i));
-      console.log(unaPregunta)
-      if(unaPregunta != null){
-        this.preguntas.push(unaPregunta);
-      }
+    while(unaPregunta != null){
+      this.preguntas.push(unaPregunta);
+      clave++;
+      unaPregunta = JSON.parse(localStorage.getItem(clave));
     }
   }
 };

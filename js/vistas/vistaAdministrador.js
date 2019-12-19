@@ -30,8 +30,8 @@ VistaAdministrador.prototype = {
   //lista
   inicializar: function() {
     //llamar a los metodos para reconstruir la lista, configurar botones y validar formularios
-    console.log(this.modelo.preguntas);
-    // this.controlador.recuperar();
+    console.log('Preguntas en el modelo: ', this.modelo.preguntas);
+    
     validacionDeFormulario();
     this.reconstruirLista();
     this.configuracionDeBotones();
@@ -41,7 +41,7 @@ VistaAdministrador.prototype = {
     var lista = this.elementos.lista;
     lista.html('');
     var preguntas = this.modelo.preguntas;
-    
+    console.log('Tiene preguntas: ', preguntas)
     if(preguntas.length === 0){
       this.controlador.recuperar();
       preguntas = this.modelo.preguntas;
@@ -109,11 +109,13 @@ VistaAdministrador.prototype = {
       contexto.controlador.editarPregunta(id, nuevoTexto);
     });
 
+    // Borrar Pregunta
     $('#borrarPregunta').click(function(){
       var id = parseInt($('.list-group-item.active').attr('id'));
       contexto.controlador.eliminarPregunta(id);
     });
 
+    // Borrar Encuesta
     $('#borrarTodo').click(function(){
       contexto.controlador.eliminarTodasLasPreguntas();
     });

@@ -28,7 +28,6 @@ var VistaUsuario = function(modelo, controlador, elementos) {
 VistaUsuario.prototype = {
   //muestra la lista por pantalla y agrega el manejo del boton agregar
   inicializar: function() {
-    // this.controlador.recuperar();
     this.reconstruirLista();
     var elementos = this.elementos;
     var contexto = this;
@@ -61,20 +60,15 @@ VistaUsuario.prototype = {
     listaPreguntas.html('');
     var contexto = this;
     
-    var preguntas = this.modelo.preguntas;
+    var preguntas = contexto.modelo.preguntas;
 
-    if(preguntas.length === 0){
-      this.controlador.recuperar();
-      preguntas = this.modelo.preguntas;
-    }
-
-    console.log(preguntas)
+    console.log('Preguntas obtenidas del modelo: ', preguntas)
 
     preguntas.forEach(function(clave){
         //completar
         //agregar a listaPreguntas un elemento div con valor "clave.textoPregunta", texto "clave.textoPregunta", id "clave.id"
         
-        console.log(clave)
+        console.log('Una pregunta del modelo: ', clave)
         // clave = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
 
         var unaPregunta = $('<div>');
