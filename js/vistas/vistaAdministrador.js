@@ -42,9 +42,11 @@ VistaAdministrador.prototype = {
     lista.html('');
     var preguntas = this.modelo.preguntas;
     console.log('Tiene preguntas: ', preguntas)
+    
     if(preguntas.length === 0){
       this.controlador.recuperar();
       preguntas = this.modelo.preguntas;
+      console.log('Recuperadas del storage: ', preguntas)
     }
 
     for(var i = 0; i < preguntas.length; ++i){

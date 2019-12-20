@@ -48,7 +48,7 @@ Modelo.prototype = {
     console.log('Posicion de la pregunta en el modelo: ', posicion)
     this.preguntas.splice(posicion, 1);
     localStorage.removeItem(laPregunta.id);
-    
+    console.log()
     this.preguntaEliminada.notificar(); 
   },
 
@@ -76,13 +76,17 @@ Modelo.prototype = {
   },
 
   recuperar: function(){
-    var clave = 1;
-    unaPregunta = JSON.parse(localStorage.getItem(clave));
+    var buscado = localStorage.getItem(clave);
+    unaPregunta = JSON.parse(buscado);
 
     while(unaPregunta != null){
       this.preguntas.push(unaPregunta);
       clave++;
       unaPregunta = JSON.parse(localStorage.getItem(clave));
+    }
+
+    for(var clave = 1; clave <= localStorage.length; clave++){
+      
     }
   }
 };
