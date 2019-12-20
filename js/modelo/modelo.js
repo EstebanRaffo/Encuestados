@@ -76,17 +76,14 @@ Modelo.prototype = {
   },
 
   recuperar: function(){
-    var buscado = localStorage.getItem(clave);
-    unaPregunta = JSON.parse(buscado);
-
-    while(unaPregunta != null){
-      this.preguntas.push(unaPregunta);
-      clave++;
-      unaPregunta = JSON.parse(localStorage.getItem(clave));
-    }
 
     for(var clave = 1; clave <= localStorage.length; clave++){
-      
+      var buscado = localStorage.getItem(clave);
+      unaPregunta = JSON.parse(buscado);
+
+      if(unaPregunta != null){
+        this.preguntas.push(unaPregunta);
+      }
     }
   }
 };
