@@ -33,6 +33,7 @@ VistaUsuario.prototype = {
     var contexto = this;
     
     elementos.botonAgregar.click(function() {
+      console.log('Entro en agregar')
       contexto.agregarVotos(); 
     });
       
@@ -44,11 +45,14 @@ VistaUsuario.prototype = {
     var contexto = this;
     //obtiene las preguntas del local storage
     var preguntas = this.modelo.preguntas;
+    console.log('Preguntas en reconstruirGrafico', preguntas)
+    
     preguntas.forEach(function(clave){
       var listaParaGrafico = [[clave.textoPregunta, 'Cantidad']];
       var respuestas = clave.cantidadPorRespuesta;
+
       respuestas.forEach (function(elemento) {
-        listaParaGrafico.push([elemento.textoRespuesta,elemento.cantidad]);
+        listaParaGrafico.push([elemento.textoRespuesta, elemento.cantidad]);
       });
       contexto.dibujarGrafico(clave.textoPregunta, listaParaGrafico);
     })
@@ -62,13 +66,10 @@ VistaUsuario.prototype = {
     
     var preguntas = contexto.modelo.preguntas;
 
-    console.log('Preguntas obtenidas del modelo: ', preguntas)
-
     preguntas.forEach(function(clave){
         //completar
         //agregar a listaPreguntas un elemento div con valor "clave.textoPregunta", texto "clave.textoPregunta", id "clave.id"
         
-        console.log('Una pregunta del modelo: ', clave)
         // clave = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
 
         var unaPregunta = $('<div>');
@@ -100,18 +101,26 @@ VistaUsuario.prototype = {
 
   agregarVotos: function(){
     var contexto = this;
+
     $('#preguntas').find('div').each(function(){
-        var nombrePregunta = $(this).attr('value');
+        console.log(this)
+        console.log($(this).html())
+        var nombrePregunta = $(this).html();
+        // var nombrePregunta = $(this).attr('value');
+        
+        console.log('nombrePregunta en agregarVotos', nombrePregunta)
+
         var id = $(this).attr('id');
         var respuestaSeleccionada = $('input[name=' + id + ']:checked').val();
         $('input[name=' + id + ']').prop('checked',false);
-        contexto.controlador.agregarVoto(nombrePregunta,respuestaSeleccionada);
+        contexto.controlador.agregarVoto(nombrePregunta, respuestaSeleccionada);
       });
   },
 
   dibujarGrafico: function(nombre, respuestas){
     var seVotoAlgunaVez = false;
-    for(var i=1;i<respuestas.length;++i){
+    
+    for(var i = 1; i < respuestas.length; ++i){
       if(respuestas[i][1]>0){
         seVotoAlgunaVez = true;
       }
@@ -119,6 +128,7 @@ VistaUsuario.prototype = {
     var contexto = this;
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawChart);
+    
     function drawChart() {
       var data = google.visualization.arrayToDataTable(respuestas);
 
@@ -128,7 +138,10 @@ VistaUsuario.prototype = {
       };
       var ubicacionGraficos = contexto.elementos.graficosDeTorta;
       var id = (nombre.replace(/\W/g, '')).split(' ').join('')+'_grafico';
-      if($('#'+id).length){$('#'+id).remove()}
+      
+      if($('#'+id).length){
+        $('#'+id).remove()
+      }
       var div = document.createElement('div');
       ubicacionGraficos.append(div);
       div.id = id;

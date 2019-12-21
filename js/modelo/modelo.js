@@ -30,12 +30,9 @@ Modelo.prototype = {
   agregarPregunta: function(nombre, respuestas) {
     var id = this.obtenerUltimoId();
     id++;
-    console.log('Respuestas de la pregunta id: ', id, respuestas)
     var nuevaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
     this.preguntas.push(nuevaPregunta);
     this.guardar(nuevaPregunta);
-    
-    console.log('Pregunta recuperada del storage: ', localStorage.getItem(id))
     
     this.preguntaAgregada.notificar();
   },
@@ -48,7 +45,7 @@ Modelo.prototype = {
     console.log('Posicion de la pregunta en el modelo: ', posicion)
     this.preguntas.splice(posicion, 1);
     localStorage.removeItem(laPregunta.id);
-    console.log()
+
     this.preguntaEliminada.notificar(); 
   },
 
@@ -73,17 +70,30 @@ Modelo.prototype = {
   //se guardan las preguntas (localstorage)
   guardar: function(unaPregunta){
     localStorage.setItem(unaPregunta.id, JSON.stringify(unaPregunta));
+    console.log('Longitud del Storage: ', localStorage.length)
   },
 
-  recuperar: function(){
-
-    for(var clave = 1; clave <= localStorage.length; clave++){
-      var buscado = localStorage.getItem(clave);
+  recuperar: function(){  
+    for (var i = 0; i < localStorage.length; i++){
+      var buscado = localStorage.getItem(localStorage.key(i));
       unaPregunta = JSON.parse(buscado);
 
+      console.log('Recuperada del storage', unaPregunta)
       if(unaPregunta != null){
         this.preguntas.push(unaPregunta);
       }
     }
+    console.log('Recuperadas del storage: ', this.preguntas)
+  },
+
+
+  // unaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
+  // unaRespuesta = {'textoRespuesta': respuesta, 'cantidad': cantVotos}
+  agregarVoto: function(nombrePregunta, respuestaSeleccionada){
+    console.log('Pregunta que llega a agregarVoto en el modelo', nombrePregunta)
+    console.log('Respuesta seleccionada', respuestaSeleccionada)
+
+    // Hacer que llegue el id y buscar por id pregunta. Buscar con find.
   }
+
 };
