@@ -10,17 +10,18 @@ var Modelo = function() {
   this.preguntaEliminada = new Evento(this);
   this.todasLasPreguntasEliminadas = new Evento(this);
   this.preguntaEditada = new Evento(this);
+  this.votoAgregado = new Evento(this);
 };
 
 Modelo.prototype = {
   //se obtiene el id más grande asignado a una pregunta
   //var nuevaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
   obtenerUltimoId: function() {
-    if(this.preguntas.length == 0){
+    if(this.preguntas.length === 0){
       return 0;
     }
     else{
-      return this.preguntas[this.preguntas.length-1].id;
+      return this.preguntas[this.preguntas.length - 1].id;
     }
   },
 
@@ -38,33 +39,38 @@ Modelo.prototype = {
   },
 
   eliminarPregunta: function(id){
+    console.log('id que llego al modelo para eliminar', id)
+    var posicionEnElModelo = this.buscarPreguntaEnElModelo(id);
+    console.log('Posicion de la pregunta en el modelo: ', posicionEnElModelo)
+    // localStorage.removeItem(localStorage.key(posicionEnElModelo));
+    // var buscado = localStorage.getItem(this.preguntas[posicionEnElModelo].id)
+    // var laPregunta = JSON.parse(buscado);
+    this.preguntas.splice(posicionEnElModelo, 1);
+    localStorage.removeItem(id);
+
+    this.preguntaEliminada.notificar(); 
+  },
+
+  buscarPreguntaEnElModelo: function(id){
     var laPregunta = this.preguntas.find(function(unaPregunta){
       return unaPregunta.id == id;
     });
-    var posicion = this.preguntas.indexOf(laPregunta);
-    console.log('Posicion de la pregunta en el modelo: ', posicion)
-    this.preguntas.splice(posicion, 1);
-    localStorage.removeItem(laPregunta.id);
 
-    this.preguntaEliminada.notificar(); 
+    return this.preguntas.indexOf(laPregunta);
+  },
+
+  editarPregunta: function(id, nuevoTexto){
+    var posicion = this.buscarPreguntaEnElModelo(id);
+
+    this.preguntas[posicion].textoPregunta = nuevoTexto;
+    this.guardar(this.preguntas[posicion]);
+    this.preguntaEditada.notificar();
   },
 
   eliminarTodasLasPreguntas: function(){
     this.preguntas = [];
     localStorage.clear();
     this.todasLasPreguntasEliminadas.notificar();
-  },
-
-  editarPregunta: function(id, nuevoTexto){
-    let pos = 0;
-
-    while(this.preguntas[pos].id != id){
-      pos++;
-    }
-
-    this.preguntas[pos].textoPregunta = nuevoTexto;
-    this.guardar(this.preguntas[pos]);
-    this.preguntaEditada.notificar();
   },
 
   //se guardan las preguntas (localstorage)
@@ -75,25 +81,28 @@ Modelo.prototype = {
 
   recuperar: function(){  
     for (var i = 0; i < localStorage.length; i++){
+      console.log(localStorage.key(i))
       var buscado = localStorage.getItem(localStorage.key(i));
       unaPregunta = JSON.parse(buscado);
 
       console.log('Recuperada del storage', unaPregunta)
-      if(unaPregunta != null){
-        this.preguntas.push(unaPregunta);
-      }
+      this.preguntas.push(unaPregunta);
     }
-    console.log('Recuperadas del storage: ', this.preguntas)
   },
-
 
   // unaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
   // unaRespuesta = {'textoRespuesta': respuesta, 'cantidad': cantVotos}
-  agregarVoto: function(nombrePregunta, respuestaSeleccionada){
-    console.log('Pregunta que llega a agregarVoto en el modelo', nombrePregunta)
-    console.log('Respuesta seleccionada', respuestaSeleccionada)
+  agregarVoto: function(idPregunta, respuestaSeleccionada){
+    var posicionDeLaPregunta = this.buscarPreguntaEnElModelo(idPregunta);
+    
+    var laRespuesta = this.preguntas[posicionDeLaPregunta].cantidadPorRespuesta.find(function(unaRespuesta){
+      return unaRespuesta.textoRespuesta == respuestaSeleccionada;
+    });
+    posicionDeLaRespuesta = this.preguntas[posicionDeLaPregunta].cantidadPorRespuesta.indexOf(laRespuesta);
 
-    // Hacer que llegue el id y buscar por id pregunta. Buscar con find.
+    this.preguntas[posicionDeLaPregunta].cantidadPorRespuesta[posicionDeLaRespuesta].cantidad++;
+    this.guardar(this.preguntas[posicionDeLaPregunta]);
+    this.votoAgregado.notificar();
   }
 
 };

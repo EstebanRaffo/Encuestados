@@ -41,7 +41,7 @@ VistaAdministrador.prototype = {
     var lista = this.elementos.lista;
     lista.html('');
     var preguntas = this.modelo.preguntas;
-    console.log('Tiene preguntas: ', preguntas)
+    console.log('El modelo tiene estas preguntas: ', preguntas)
     
     if(preguntas.length === 0){
       this.controlador.recuperar();
@@ -88,14 +88,24 @@ VistaAdministrador.prototype = {
       var value = e.pregunta.val();
       var respuestas = [];
 
+      if(value === ''){
+        alert('Debe ingresar una pregunta');
+        return;
+      }
+
       $('[name="option[]"]').each(function() {
         //completar
         // var unaRespuesta = {'textoRespuesta': respuesta, 'cantidad': cantVotos}
         textoDeRespuesta = $(this).val();
-        if(textoDeRespuesta != ''){
+        if(textoDeRespuesta !== ''){
           respuestas.push({'textoRespuesta': textoDeRespuesta, 'cantidad': 0});
         }
       })
+
+      if(respuestas.length === 0){
+        alert('Debe ingresar al menos una respuesta');
+        return;
+      }
 
       contexto.limpiarFormulario();
       contexto.controlador.agregarPregunta(value, respuestas);
@@ -113,6 +123,7 @@ VistaAdministrador.prototype = {
     // Borrar Pregunta
     $('#borrarPregunta').click(function(){
       var id = parseInt($('.list-group-item.active').attr('id'));
+      console.log('id seleccionado en Vista Administrador: ', id)
       contexto.controlador.eliminarPregunta(id);
     });
 

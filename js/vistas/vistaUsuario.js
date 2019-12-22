@@ -23,6 +23,10 @@ var VistaUsuario = function(modelo, controlador, elementos) {
   this.modelo.preguntaEditada.suscribir(function(){
     contexto.reconstruirLista();
   });
+
+  this.modelo.votoAgregado.suscribir(function(){
+    contexto.reconstruirGrafico();
+  });
 };
 
 VistaUsuario.prototype = {
@@ -45,7 +49,6 @@ VistaUsuario.prototype = {
     var contexto = this;
     //obtiene las preguntas del local storage
     var preguntas = this.modelo.preguntas;
-    console.log('Preguntas en reconstruirGrafico', preguntas)
     
     preguntas.forEach(function(clave){
       var listaParaGrafico = [[clave.textoPregunta, 'Cantidad']];
@@ -103,9 +106,7 @@ VistaUsuario.prototype = {
     var contexto = this;
 
     $('#preguntas').find('div').each(function(){
-        console.log(this)
-        console.log($(this).html())
-        var nombrePregunta = $(this).html();
+        var nombrePregunta = $(this).attr('id');
         // var nombrePregunta = $(this).attr('value');
         
         console.log('nombrePregunta en agregarVotos', nombrePregunta)
