@@ -37,7 +37,6 @@ VistaUsuario.prototype = {
     var contexto = this;
     
     elementos.botonAgregar.click(function() {
-      console.log('Entro en agregar')
       contexto.agregarVotos(); 
     });
       
@@ -105,16 +104,25 @@ VistaUsuario.prototype = {
   agregarVotos: function(){
     var contexto = this;
 
+    if(this.elementos.nombreUsuario.val() == ''){
+      alert('Debe informar su nombre');
+      return;
+    }
+
     $('#preguntas').find('div').each(function(){
-        var nombrePregunta = $(this).attr('id');
+        var idPregunta = $(this).attr('id');
         // var nombrePregunta = $(this).attr('value');
-        
-        console.log('nombrePregunta en agregarVotos', nombrePregunta)
 
         var id = $(this).attr('id');
         var respuestaSeleccionada = $('input[name=' + id + ']:checked').val();
+
+        if(respuestaSeleccionada == null){
+          alert('Debe contestar todas las preguntas');
+          return;
+        }
+
         $('input[name=' + id + ']').prop('checked',false);
-        contexto.controlador.agregarVoto(nombrePregunta, respuestaSeleccionada);
+        contexto.controlador.agregarVoto(idPregunta, respuestaSeleccionada);
       });
   },
 
