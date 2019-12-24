@@ -30,7 +30,6 @@ VistaAdministrador.prototype = {
   //lista
   inicializar: function() {
     //llamar a los metodos para reconstruir la lista, configurar botones y validar formularios
-    console.log('Preguntas en el modelo: ', this.modelo.preguntas);
     
     validacionDeFormulario();
     this.reconstruirLista();
@@ -123,7 +122,6 @@ VistaAdministrador.prototype = {
     // Borrar Pregunta
     $('#borrarPregunta').click(function(){
       var id = parseInt($('.list-group-item.active').attr('id'));
-      console.log('id seleccionado en Vista Administrador: ', id)
       contexto.controlador.eliminarPregunta(id);
     });
 
