@@ -104,7 +104,7 @@ VistaUsuario.prototype = {
   agregarVotos: function(){
     var contexto = this;
 
-    if(this.elementos.nombreUsuario.val() == ''){
+    if(contexto.elementos.nombreUsuario.val() == ''){
       alert('Debe informar su nombre');
       return;
     }
@@ -116,14 +116,15 @@ VistaUsuario.prototype = {
         var id = $(this).attr('id');
         var respuestaSeleccionada = $('input[name=' + id + ']:checked').val();
 
-        if(respuestaSeleccionada == null){
-          alert('Debe contestar todas las preguntas');
-          return;
-        }
-
         $('input[name=' + id + ']').prop('checked',false);
-        contexto.controlador.agregarVoto(idPregunta, respuestaSeleccionada);
-      });
+
+        if(respuestaSeleccionada != null){
+          contexto.controlador.agregarVoto(idPregunta, respuestaSeleccionada);
+        }
+    });
+
+    contexto.elementos.nombreUsuario.val('');
+    alert('Encuesta enviada !');
   },
 
   dibujarGrafico: function(nombre, respuestas){
