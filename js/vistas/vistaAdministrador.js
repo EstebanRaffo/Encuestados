@@ -40,7 +40,6 @@ VistaAdministrador.prototype = {
     var lista = this.elementos.lista;
     lista.html('');
     var preguntas = this.modelo.preguntas;
-    console.log('El modelo tiene estas preguntas: ', preguntas)
     
     if(preguntas.length === 0){
       this.controlador.recuperar();

@@ -74,7 +74,6 @@ Modelo.prototype = {
   //se guardan las preguntas (localstorage)
   guardar: function(unaPregunta){
     localStorage.setItem(unaPregunta.id, JSON.stringify(unaPregunta));
-    console.log('Longitud del Storage: ', localStorage.length)
   },
 
   recuperar: function(){  
@@ -82,9 +81,13 @@ Modelo.prototype = {
       var buscado = localStorage.getItem(localStorage.key(i));
       unaPregunta = JSON.parse(buscado);
 
-      console.log('Recuperada del storage: ', unaPregunta)
       this.preguntas.push(unaPregunta);
     }
+
+    // El localstorage no asegura ordenamiento con lo cual el array puede no estar ordenado. 
+    // Entonces se aplica un sort por id para ordenarlo.
+    function comparar(a, b){return a.id - b.id}
+    this.preguntas.sort(comparar)
   },
 
   // unaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
