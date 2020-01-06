@@ -14,7 +14,8 @@ var Modelo = function() {
 };
 
 Modelo.prototype = {
-  //se obtiene el id más grande asignado a una pregunta
+  //Se obtiene el último id asignado a una pregunta. Al agregar una nueva pregunta dicho id se incrementará en 1 para ser el id de
+  //la nueva pregunta. Ese id será el utilizado como clave para almacenar la pregunta en el localStorage.
   //var nuevaPregunta = {'textoPregunta': nombre, 'id': id, 'cantidadPorRespuesta': respuestas};
   obtenerUltimoId: function() {
     if(this.preguntas.length === 0){

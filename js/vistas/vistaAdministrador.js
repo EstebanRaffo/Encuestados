@@ -83,49 +83,49 @@ VistaAdministrador.prototype = {
 
     //asociacion de eventos a boton
     e.botonAgregarPregunta.click(function() {
-      var value = e.pregunta.val();
-      var respuestas = [];
+        var value = e.pregunta.val();
+        var respuestas = [];
 
-      if(value === ''){
-        alert('Debe ingresar una pregunta');
-        return;
-      }
-
-      $('[name="option[]"]').each(function() {
-        //completar
-        // var unaRespuesta = {'textoRespuesta': respuesta, 'cantidad': cantVotos}
-        textoDeRespuesta = $(this).val();
-        if(textoDeRespuesta !== ''){
-          respuestas.push({'textoRespuesta': textoDeRespuesta, 'cantidad': 0});
+        if(value === ''){
+          alert('Debe ingresar una pregunta');
+          return;
         }
-      })
 
-      if(respuestas.length === 0){
-        alert('Debe ingresar al menos una respuesta');
-        return;
-      }
+        $('[name="option[]"]').each(function() {
+          //completar
+          // var unaRespuesta = {'textoRespuesta': respuesta, 'cantidad': cantVotos}
+          textoDeRespuesta = $(this).val();
+          if(textoDeRespuesta !== ''){
+            respuestas.push({'textoRespuesta': textoDeRespuesta, 'cantidad': 0});
+          }
+        })
 
-      contexto.limpiarFormulario();
-      contexto.controlador.agregarPregunta(value, respuestas);
+        if(respuestas.length === 0){
+          alert('Debe ingresar al menos una respuesta');
+          return;
+        }
+
+        contexto.limpiarFormulario();
+        contexto.controlador.agregarPregunta(value, respuestas);
     });
     
     //asociar el resto de los botones a eventos
     
     // Editar Pregunta
-    $('#editarPregunta').click(function(){
-      var id = parseInt($('.list-group-item.active').attr('id'));
-      var nuevoTexto = prompt('Editar pregunta');
-      contexto.controlador.editarPregunta(id, nuevoTexto);
+    e.botonEditarPregunta.click(function(){
+        var id = parseInt($('.list-group-item.active').attr('id'));
+        var nuevoTexto = prompt('Editar pregunta');
+        contexto.controlador.editarPregunta(id, nuevoTexto);
     });
 
     // Borrar Pregunta
-    $('#borrarPregunta').click(function(){
+    e.botonBorrarPregunta.click(function(){
       var id = parseInt($('.list-group-item.active').attr('id'));
       contexto.controlador.eliminarPregunta(id);
     });
 
     // Borrar Encuesta
-    $('#borrarTodo').click(function(){
+    e.borrarTodo.click(function(){
       contexto.controlador.eliminarTodasLasPreguntas();
     });
 
