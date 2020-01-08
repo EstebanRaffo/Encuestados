@@ -1,6 +1,7 @@
 /*
- * Vista usuario
+ * Vista Usuario
  */
+
 var VistaUsuario = function(modelo, controlador, elementos) {
   this.modelo = modelo;
   this.controlador = controlador;

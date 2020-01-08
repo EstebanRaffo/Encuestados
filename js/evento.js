@@ -1,4 +1,4 @@
-//Evento
+// Evento
 var Evento = function(emisor) {
   this.sujeto = emisor;
   this.observadores = [];

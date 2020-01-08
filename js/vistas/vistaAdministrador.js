@@ -1,5 +1,5 @@
 /*
- * Vista administrador
+ * Vista Administrador
  */
 var VistaAdministrador = function(modelo, controlador, elementos) {
   this.modelo = modelo;
